@@ -1,0 +1,1220 @@
+Docker Documentation:
+---------------------
+* Every application has the business logic build where entire code which we have written forms into, that is the central part of the software what ever we build.
+* that every application is hosted in the application layer to be accessed by the outside world through web layer by quearys created threds.
+* launching/running a  application has evolved form tradition way(physical servers) to modern way(cloud)
+
+Different Generations of running the applications:
+--------------------------------------------------
+Basically application have Business logic and they bring the revenue,to make the application run we need servers,
+* There are 3 major generations / approches of running the applications servere, thus we should know how the organizations evolved from different approches
+in running the application.
+
+Generation1: Running the application on the physical servers
+------------------------------------------------------------
+* To run any application 2 servers are major importent
+  1) Application servere
+  2) web server
+  
+Every time if we want to access any application through the web browser we enter the url of the application and search for it,
+* then the web server that hits the application server and it writes a queary  to the data base server and it sends the info to application server and to the web server
+in web page the information regarding the queary is shown.
+* Data base we develop MYSQL  Data base using Python/java/.net based on the application.
+
+* if we us the redHat for running this we use Ubuntu server linux os, Linux kernal->core ops
+they build the disturbutions-redHat and debian , adding more features to they make users frendly.
+
+* to run the application we need app server
+
+gen-1 example 
+-------------
+
+* To run the application of the we site we need web server
+* generally in generation when when we need a resource physical servers , to the admin team we raise required specifactions, like cpu's and ram and suggest
+them to keep some more to avoid downtime.
+* generally purchase or requriement of physical servers means investment
+Capex cost->  
+          <-return on investment
+* they need to install operation systems of licenced versions, and on top of that they need some storege space for os 
+* on that server we launch application developed by the developer.
+* more servers equal to more capex cost. so we can run multple applications on one server but it is not good way to do , more ram/storage more capex
+* In the case of under usage of resources may lead to the decrease in return on investment.
+
+2nd generation:
+---------------
+HYPERVISOR:
+
+* there comes the second generation of running the application  that is virtulization
+* on your server we install the Hypervisor.
+* That helps to create multiple virtual servers on the server. by using the Vm ware software.
+* By using the hypervisor we create virtual servers and in that servers cpu/ram  everything is virtual, and we can create as many virtual servers untill 
+the Hardware runs out of storage, runs out of its capacity.
+* In side vm we install os and both web/app will be running on the same physical server but in different virtual machines 
+* we can run multiple applications inside the vm , here we have one host server(physical server) on top of that we we launch, multiple guest servers
+* we install Hypervisor(vm ware) on one server and we create multiple vms(virtual machines)
+*better approch but cost effective , we need to buy licences for hypervisor soft ware and the oprrating systems.
+
+3rd Generation approch
+---------------------- 
+
+*3rd Generation approch we are looking to move from Hypervisors where os is maintained by the other software and we can concentrate on the application 
+most of the time.
+*so we have the software that make work easy just we need to install software  called Docker on the server.
+* Docker trys to tell  you that I will give you a area where you can run your application, There will be very light weigth os where everything is present 
+on the host server and when ever it need some thing it calls the host os
+* For us it looks likes that on the host it self the application is running but actully in the background it is happening.
+* basically to run a application we need storage,ram,folders(file system)
+* Os gives Filesystem /Ram/ this kind of information to your application, When ever it need help it call the source with the help of docker.
+* Here in the container technology like docker they maintain the os on the source and inside the containers os will be thin and light weight. but it looks 
+like as it is the main os(processer) , it only takes what ever required to run the application in side the container and any quearycalls source.
+* if the OS is light weight then we have a chance of running multiple application on single vm/server that container software is Docker.
+* It creates a isolated area to run the application it looks as it in full form bu it is leight weight.
+*i can run run the application multiple time and diff applictaions multipe times. it consumes less cpu/ram so it can be portable carry any where and runs 
+every where.
+
+Advantages:
+------------
+* cost effective,by running multiple application on the one server , it cna scale multiple times to run the application less cost, and more over we can make
+more time to handle our applictaion more than andeling the resources.
+* basically this tech is present in linux form day 1 but using it is diffucult, but docker made it easy,
+ 
+ What is container:
+ ------------------
+ Container is an isolated area that created by the docker engine(docker)
+ Every Container gets an * Ip address
+                         * cpu
+						 * Ram
+						 
+.For every application it needs 
+ 1. Network
+ 2. File system
+ 3. cpu
+ 4. ram
+ 
+ it feels like container is running in os but truth is os is running inside the container.
+ 
+ Docker has area to have some hands on the tech:
+ 
+ Docker playground usually it is free open source we can have practice over here.
+ 
+ containerization:
+ ================
+ when ever we are running our application inside the container is called containerization.
+ 
+ History:
+ -------
+Basically Docker is doveloped by the DOtcloud they created platform for tecting the software by accidentally. but no one is intrested in dotcloud but theyare intrested 
+in containerization.
+initially it only supported linux, but microsoft got its potential and they changed code in win 10/11 so it supports windows also
+and dotcloud made the market to do work easy and latter they changed there name to  Docker Inc.
+and google has a eye on this technology and they developed software that is K8s with the experience in running the containers.
+
+so K8s can relaing on any container technology and mainly on docker.
+
+
+* this container tech made running the applictaion easier and when the applictaion is ruuning it looks like ur are running os, Docker looks like os like windows and linux.
+
+
+ Containers:
+ ===========
+ * the main advantage of runnig the applictaion in container is it can be portable
+
+Lets run the container on vm by installing Docker on the linux machine.
+
+To install docker on linux machine
+
+* create a linux machine in any cloud or hypervisor.
+* to install the docker in linux search "Docker install script":https://get.docker.com/
+
+This script is meant for quick & easy install via:
+#   $ curl -fsSL https://get.docker.com -o get-docker.sh
+#   $ sh get-docker.sh
+
+To check the docker on linux "Docker Info"
+we have some user permissions denied on the server so we need to add the docker to the ubuntu group.
+
+After installing the script we need to add  docker to group.
+
+ "Sudo usermod -aG docker ubuntu"
+ now exit and relogin and then check for the status "docker Info"
+ 
+ we get all the access to the docker on ubuntu.
+ 
+ ===========================================
+ 
+ Now we should check how docker works.
+ 
+ "docker container run -d -P Jenkins/Jenkins"
+ "docker container run -d -P httpd"
+ "docker container run -d -P nginx"
+ "docker container run -d -P apache"
+ if we type "docker container ls"
+ we can see on same server we can run multiple applications. we also gets all the ports information
+ 
+ this is some basic example with commands to run multiple applications of same or different, so i can also run multiple versions also using containers.
+ 
+ * now if we see i can create multiple container and run multiple application by installing docker engine(docker) on the linux and executing some commands.
+ * I ran multiple applictions but still i have space left to run some more applictions in containers and docker has made containerization extremly simple.
+ 
+ Microservices:
+ ==============
+  * we run our application on physical servers and it has some archicture , that is front end web server, app server launched in linux and data base.
+  * running whole application on one archicture in traditional not only that whole application is developed in single  language.
+  * data from the application is store in the backend data base. main application business logic is in the application server. front end is also server 
+component of browser.
+* they are connected to one network.
+* lets Focuse on the app tire/layer
+-> administration
+->user management
+-> Inventory
+-> Ctaolog
+-> Cart
+-> payment
+-> Notification
+
+To run all of this components we need huge server , because my org depands on this.
+
+* When ever User try to website, in server a thread is created and that thread we have storage/ram/utlized, No of Threds increase amount of Cpu/Ram 
+Utlization Increase
+Generally web server have certain limit , if the limit exeecds so then the other users have to wait in quee that unable to access the application
+To Fix this issue we have servers capable of serving the customer with scaling concept comes under.
+
+
+Another solution is Docker:
+--------------------------
+-> on the server we install docker, now we broke the application in smaller executable components and by using multiple containers, so that when ever servers
+-> Each application is launched in each container and  and traffic is disturbuted individually to each and every app service when that service is used
+-> so i can run multiple containers on same server and can individually scale each container service. and i can run any where.
+
+MicroServices:
+=============
+* This is about breaking the monolith application into smaller services(Whole application) which is build by the developer with the code.
+and running those in a effective manner.
+*each micro service represents generally a module functonality and runnig them effectively without disturbing the application.
+* Now running each application is one part and they should communicate between each other and when ever developer comes with the new code of one service
+and i can do smaller changes in the application to each service without disturbing other functonalitys, 
+* if this approch is done with my application then each functonalitycan be developed in the sutable language which is sutable to the application.
+* so this cannot be done with the monolith application and if i want to change my code to one service in the application i need to change my entire application
+to that language.
+* but in docker each service can be each technology.
+This can be * cost cutting,Advantage over the technology.
+
+* now running any application need 
+Filesystem/cpu/network/storage
+In linux also we need same 
+To know network in the linux we use "df -h" and for "ps" for process history.
+
+In dockeer container Execute "ls" command and we get list of docker containers, select any of the id and exectute 
+"docker container exec -it <id, name of container> /bin/shor /bin/bash"
+
+Into the container and inside the container "df -h" docker have sme way of file system in it.
+
+Basically container has no permissions because it is thin and slim os and it has only what is required for container block to run it handles it.
+
+*How do I access a container in Linux?
+*How do I SSH into a running container
+*Use docker ps to get the name of the existing container.
+*Use the command docker exec -it <container name> /bin/bash to get a bash shell in the container.
+*Generically, use docker exec -it <container name> <command> to execute whatever command you specify in the container.
+
+"docker container run -it nginx /bin/sh"
+
+after we execue this command we can login in to the container and know the status of af the container specifications
+
+/# ip address
+/# df -h file system
+/# top (to know cpu ram)
+/# exit to get out from the container.
+
+Now execute "docker image ls"
+
+What is that we need to do this:
+-------------------------------
+1. make sure application /server run inside the containers=>containerization
+->ensure that application is running inside the container.
+->ensure we can scale the container automatically or manually.
+->we actually scale the components .
+->enable CI/CD pipeline to make smaller changes frequently without downtime.
+
+Possibility:
+=========== 
+Now we can run the new functonalitywithout deleting the old one and run the new and if its working we can manage to delete old one.
+
+
+In any technology or generation the main challenges faced are:
+
+1. Network
+2. Storage
+
+Storage:
+-------
+for any application or service admins should maintain there storege some where.
+
+Network:
+-------
+every application shoul have network connection to expose to the outer world internet access or to communicate within the organization.
+
+* next thing is every container needs to communicate within them selfs to all the container look as if they are working as single application.
+* assigning the network to the container is some tipical part and by default when we run the container we get default network, but we can define our own 
+network and make the containers to run within that defined network.
+
+
+Docker container :
+=================
+A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another. 
+A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, 
+runtime, system tools, system libraries and settings. 
+
+Container images become containers at runtime and in the case of Docker containers – images become containers when they run on Docker Engine.
+Docker containers that run on Docker Engine:
+
+
+Dcker container runtime:
+-----------------------
+*Standard: Docker created the industry standard for containers, so they could be portable anywhere
+
+*Lightweight: Containers share the machine’s OS system kernel and therefore do not require an OS per application, 
+driving higher server efficiencies and reducing server and licensing costs
+
+*Secure: Applications are safer in containers and Docker provides the strongest default isolation capabilities in the industry
+
+
+Inside the Docker container:
+---------------------------
+* Individual scaling has one advantage, that is when ever we run container inside the container we run the technology req for that micro service inside the container
+so we can individually scale up and down withiout zero down time. we can also reuse/run/ update the resources individually.
+
+
+* Advantages of microservices:
+------------------------------
+* we can run the whole application on 1gb ram/cpu , we can run multiple applications, by breaking them into small functonalitys and and you can scale up untill
+you can maximize the running of your application.
+
+monolith:
+---------
+All parts of the applicationon on server and business logic on another server, 
+
+mocroservices break the application into the small functonalitys that run on containers.
+
+
+Defining a container:
+======================
+* docker can be installed on any os of linux/windows and we know to install the docker on any machine because its a container software that maintain
+or creates container.
+
+* when we install docker on ubuntu or windows machine and docker clint gets created and 
+* that docker component is a server component, and other docker component also created that is docker client.
+*docker clint gets create when installed and not the server component , docker client is nothing but commands.
+* what ever we ask docker clint connects with server and it shows the result, docker engine intracts with the server.server responds to the clint and it shows you.
+* docker --version it shows version of the docker clint not server,check for "Docker info" we only get clint compoments not server components.
+* we need to add the docker client should be part of docker engine group to communicate between client and server.
+* when ever we run any thing client connects with serve and respons back.
+
+Creating a docker container:
+---------------------------
+* when ever we run the command to be executed that is for creating the container
+
+ex: $ "docker container run -d httpd" here we are running as a non root user and when ever we execute some command that is we are calling a image.
+ this image is located in the docker repository. that is Docker hub.
+ 
+ In this repository we have the required application package in the form of package , when we run a container command some dependencies get downloded
+ if same executed 2nd time nothing gets downloded because that local docker repo on server downlodes the packages for docker  registary and that info
+ of the image gets stored in the server .
+ This registary accessed over the internet.Docker hub is the collection on images.
+   
+ * when ever we run the command client calls the demon/server/docker engine and that engine download the image.
+ Image is a executable file and when we execute the command the containers gets created. we also need to know that we are able to run the images that are
+ alredy created and we need to run our own application so we need to create a image out of it and push to own/docker repository
+ 
+ The "run" command is for creating the containers.
+ 
+ what happens when command executed:
+ ==================================
+ when the dcoker run command execute then the client calls the docker server/demon on the server. that checks the image locally on the server image-repo
+ if the image is present on the server repo it creates container if not it downloads the package and then cretaes the container.
+ 
+ There are two types of configuration that docker hub is default configured and we can only pull the existing images
+ 
+ if own repository then the we need to configure that repositry "docker login" and provider user name and password when we create the custome image
+ we can push into the own repository.
+ 
+ "docker image push <image name>"
+ "docker image pull <image name>
+ 
+ if you pull the image for the repo then it downloads all the dependencies to the local repo and when you run the container it directry creates container.
+ 
+ * image pull will be done in the explict way. it gets downloaded form the open source where lots of images present in the repository.
+ * Container helps the application to run in the compressed way that it can utlize the hard ware in effective manner
+ 
+ Image and tags:
+ ===============
+ * Every image in the docker hub represents a application each application or every application has a version
+ * in docker we have the name of the image and to represent the version we use tags
+ "<image-name>:tag"
+ 
+ "hello-world:latest"
+ 
+ here the tage of the hello world applictaion is latest. if the tag is not passed the docker consider it as latest.
+ 
+ * as long as the image and tags are present there is image id for every image.
+ * In registary we have different tags for one image and we can run same image with diff tags.
+ * we get the time that tis the time of creation of the particular image in the docker hub.
+ -> every image have a unique id , if two images in same repository with different tags and diff repository with two diff tags have same image id that is same image.
+ 
+ Container creation:
+ ------------------
+ Life cycle of the container 
+ 1. create container: basically to create container we use run command
+ 2. start container: For starting the conatiner and to know the utlization of the cpu/ram
+ 3. stop conatienr: to stop the container
+ 4. pause cotainer: to pause its executions
+ 5. unpause conatiner: to unpause its executions
+ 6. delete container: to remove the container/delete the container
+ 
+ Every container which gets created has 1. Unique id, 2. Container name
+ 
+ -> if you run and docker command to create container "docker container run <image name>:tag"
+ 
+ then to check the containers running use "docker container ls"
+ by default docker shows the running containers but to see over all the containers status on the host which are stoped but not deleted "docker container ls -a/--all"
+ list of all the containers.
+ 
+ * another thing that docker doces by default is assigining the names to the container, every container that is created has unique id and name given by the docker
+ But we can assign the name to the docker caontainer as we wish
+ 
+ ""docker container run --name <name of the container> <image name>:tag ""
+  
+ Run command:
+ ------------
+ Basically run command looks like run the container, but actually it creates the container with name.
+ 
+ we see list of all the docker containers that created on the host in that some may stop/run , some may stops executing.
+ 
+ when container created every container gets its own 
+ ->network ip address
+ ->Ram
+ ->File system
+ ->Cpu
+ 
+ 
+ Exploring the containers:
+ -------------------------
+ Now we try to explore the docker host by executing some commands
+ 
+ "ps" Process that are running on the machine.
+ "ps aux" to see every thing.
+  to get the ip address or ip configuration
+  "ip config" "ip addr"
+  
+  To get user details
+  
+  Username->"name of the user"
+  hostname-> " name of the host"
+  
+ To explore storege 
+ 
+ "df -h" or lsbk(list of block storage)
+ 
+ Now to explore inside the container we need to login into the container,
+ 
+ "docker container run -it <image name>:<tag> /bin/sh or /bin/bash"   = ( -it) is intractive terminal
+ 
+ we enter into the docker container
+ 
+ #/: whoami
+ #/: hostname
+ 
+ Execute following commands to check the user name and  hostname 
+ to check ip "ipaddr"
+ examine the running process "ps"
+ in container to look at the storage "df -h" 
+ 
+ so based on all the observation in the container all the file systems etc looks like linux machine inside the container on linux machine.
+ 
+
+ 
+ * every containe has Ip address,file system and ram and that file system is same as linix, so we can launch our application inside ths container
+ when we run the docker image on the linux machine we are creating the copy of the disk, so we can give the files access for full blown or we can give 
+ required access to the application to run.
+ 
+ 
+ Difference between os/container:
+ --------------------------------
+ we have docker image for the docker hub/own repository, for example one image of 100mb , when it is downloaded or pulled from the repository, along with 
+ that image all the file required for the application/ image gets doenloaded and if it wants storage it  creates a virtual disk to utlize for the space,or the 
+ information form the application.
+   so now we can use the same image to another container to run so consumption of files will be same but storege a virtual disk will be created for next contaienr
+ so that only storage consumption is virtual disk.
+ 
+  
+ Working Process of containers:
+ ==============================
+ * container can be defined as an isolated area with some resource limits,It have only necessary resources to run the application inside the container.
+ * Container space of one has no problem with the other container's space,and those containers are easely portable in sence can be transfer for one machine to another.
+ * basically we need a processer to execute the code of the application in the container and you need memory (ram) to store the information about application.
+  you need to accesss inside the container to know whats inside the container we need "IP address" Ip addr.
+ * every container req a file system inside the container req to run the application inside it,and the container/isolated ared has a resourece limit,
+ 
+* There are two things that are req for the containers form linux,without these fetures container won't work ,even microsoft changed its code to have name spaces and control groups
+ they are
+ 
+ 1. Namespaces:
+ 2. Cgroups(controll groups):
+ 
+ 
+ Namespaces:
+ 
+ important ares to run the namespaces
+ 1. process:cpu/ram
+ 2. mount: filesystem/disk
+ 3. network: networkip
+ 4. users:
+ 
+ 
+ 
+ we take a linux machine where is run my containers and on that a process tree is created  that is because in any process all the processes do not start at once.
+ they start one by one 
+ every process have a tree in the linux and every process have a id that is "pID" process id
+ so if we look in the process tree what ever is executed that creates a process tree there are multiple process running in the machine each have one id,
+ 
+* if you want to create a isolated area that is also a process and there again new process starts inside the isolated area.
+ that is in every machine there is a root module that starts process and and of you end process tree all the process cretaed are deleted, so same as this linux process name space isolated area
+also have its own process tree inside it. this is because of the process namespace.
+ 
+* so for the above conclussion we can create or give new root system new file system and new network interface using name spaces
+ 
+* assigining the ip same as host can be given. but if one port is assigned to host or th container we cannot assgine same port to container or application.
+
+Mount name space:
+----------------
+I give what ever is necessary files req for my application, mount namespace is used to provide the exact files required for the the container not even one unnecessary file.
+
+Cgroups:
+---------
+* cgroups can ristrict the limits of the containers, the amount of sapec in the conatainer or to the aplication
+* here two concepts that are used in the docker one is "namespaces" another one "cgroups" 
+* name spaces crete isolated area to run application functonalitys, but cgroups putting the restrictions to the resource in the container/isolated area
+
+Basically docker depends in the linux code in the kernel initially when the container is created by calling the linux code in the kernal if the code in the kernal changes then the container stops working
+because linux code is updated but not the docker ,so to solve this solution docker came up developing in the lib language so there is no issue with the linux kernal code updation.
+
+
+refer here:"https://directdevops.blog/2019/01/31/docker-internals/"
+
+* docker has created a isolated area using the namespaces and process namespace starts the process and assign pID giving cpu/ram,and mount name space assign required files to run the application,
+network assigns/ creats new network inside the container and assign new ip addr to the   
+
+
+Process of the docker container creation:
+========================================
+
+we know that the docker is installed on the server then we get docker clint but not server component that is dcoker demon we add the docker group to the user group to get connection between docker clint and dcoker demom 
+ so this is ok with the installation but comming the container creation and image/application running  in the contaier there is process running in the background 
+ 
+ * that process behind container createion is the 
+ 
+ The underlying components of docker as per the latest implementation is looking as shown
+ 
+         docker-client
+		      | {rest api}
+			  |
+	    docker demon {server component}
+		      |{groups}
+			  |  
+		containerD{specifications about the container}
+		      |
+			  |
+			  /
+			 / 
+		((ci)oci) "runC" {specification how image should be} (runc for the linux)
+		
+ now when ever we run the command for creating the container with the image to be running inside the container. that run command that hits the docker clint on the host but that calls the docker demon server component
+ using rest  protocal and that demon calls "containerD" that calls "runc" that creates the container.
+ 
+ the image that is running in the container should be "OCI" component every application/image shoulg be oci component so that it can run on any container technology
+ "oci" component decides how the image should be  and containerd decides how container should create.
+ 
+ Root process stops working  of the host server whole container stops working , if the container root process stops working only particular pod .
+ 
+ the container starts running till the command is executed and when the execution of the container stops container stops like "ping google.com"
+  we have to run our conatainer in the detached mode 
+  
+ "docker container run -d -p <image name:tag>" so container starts running in the background if you give time till that time it run and then it exists.
+  
+trails:
+* Every docker container has a command that gets executed when the container is created/started. As long as that command is running the container will be in running state, 
+  if that command has finished execution container will be stopped or exited
+  
+ when the command stops execution that time container stops running, container runs based on the process runs by the commands.till it runs in the background.
+ there fore the container runs using the startup command and till process execution in the background.
+  
+  
+create a docker container and install application in it:
+--------------------------------------------------------
+to the container in the background we run thr container in the detached mode (-d), to run the application inside tha container by running the commands 
+
+""
+sudo apt update 
+sudo apt install apache2 -y
+""
+
+apache runs on 80 port and now we need to run a ubuntu container by pulling the image , and we need to runit in interactive mode and ,port forwording
+should be done , port forwording basically used because every application has one port and if the port is assigned to one we cannot assign it to another
+so we need to launch 8081 on the host server and 80 on the container , when ever we need to connect with the 80 port we can cann the 8081 port 
+
+
+lets create a docker image by manually installing softwares in container
+Lets install a nginx in some container and create a image out of it
+lets create a container in a interactive mode
+
+"docker container run -p 8082:80 -it ubuntu:22.04 /bin/bash"
+# apt update
+# apt install nginx -y
+# service nginx start
+Now lets create a docker image from running container
+In the docker host
+
+"docker commit <container-name/id>"
+
+* Now lets create an image and tag based the image id
+
+"docker image tag <image-id> <name>"
+
+* This approach creates images but no history of changes are available.
+
+created image from  container running
+
+"docker container run -it -p 8083:80 mynginx"
+so now if you again create image form the this container it won't happen, building the image from container have no history if container stops working or server gets restart
+no chance of getting back the container.
+
+Docker Approch:
+==============
+
+*Above approch we have directly passed the docker container with ports and image and inside it we installed softwares to run this is not the better approch
+because there is no history.
+
+* docker approch is one form we use for container creation where we write a docker file where we pass the instractions to tell docker what needs to be done \
+while creating the image,and start the container and what mete data need to be passed about your image.
+* docker file has instraction to containerize the application,each micro service have one docker file, Docker can be written any text file but file name must ne "Dockerfile" 
+is most commonly used file name.
+
+"Dockerfile"
+
+From alpine:latest
+CMD  ["echo","my alpine image"]
+
+"docker image build -t <name on the folder> <tag> (.)"= if the file name is Dockerfile (.) is present directory
+"docker image build -f <name on the folder> <tag> (.)"= if the file name other that Docker file.
+
+After creating the docker image ,running the docker container form the image build
+
+"docker contaienr run <image name>"
+
+In this approch we have written basic docker file and form that file created a image ,from that image created a container , now in that docker file we can pass
+arguments to run the application and we also have the history of the what we have done to run the container from this i can create multiple conatainers by having history.
+
+This dockerfile is present at the developer code and in that dockerfile we have steps to run the application inside tha docker file.
+
+docker build and maven build:
+----------------------------
+dockerbuild: in docker builds tha code and create a docker image, image executed creates a container
+maven build: buildst the java code and creates a maven package.
+
+created and ubuntu image and created a container using the image
+
+"docker container run -d --name mam -p 8085:80 nginx:latest sleep 1d"
+
+
+Containerize the Java (Spring boot) Application:
+===============================================
+
+* basically the spring boot java application has a built in malware,which helps in building the java applications.
+* the extansion of the java application is "jar", to run the java application command after the package is build "java -jar <name of the application>.jar"
+* now we try to run the java project that was build on the spring boot that is "spring pet clinic"
+* for that we need java 17 and 8080 port to be exposed, for that we try installing the application on the server manually.
+ ""
+ manual steps.
+ sudo apt update.
+ sudo apt install openjdk-17-jdk -y.
+ wget https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+ after getting the apllication on to the server execute
+ "java -jar spring spring-petclinic-2.4.2.jar"
+ 
+ to access the application "http//:<public ip of the instance>:8080"
+ 
+ no we go with the docker approch.
+ ==================================
+ 
+Docker file is the set of instructions given to the application inside the container which have ths history of the contaners in this docker file Instructions are
+
+FROM :this is used to choose tha base image we use "FROM" instructions, this base image is used to create the container on top of that we run our application
+RUN :this is used to execute any commands to install/configure the application so we use "Run" instruction.
+EXPOSE :this is used to port that need to be exposed to access tha application.
+CMD :this is used to provide instruction to run the application when the container is created
+
+
+sample spring petclinic applications Docker file:
+=================================================
+FROM ubuntu:20.04
+RUN apt update
+RUN apt install openjdk-17-jdk wget -y
+RUN wget https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+EXPOSE 8080
+CMD ["java","-jar","/spring-petclinic-2.4.2.jar"]
+
+to build the docker image form the above docker file "docker image build -it <name of the folder> . "
+after from the image we need to run the container in detached mode "docker container run -d --name <> -p 8081:8080 <name of the image>:tag"
+
+here we can see that we have built the image out of docker file and then we created container form the image now if we want to change or add instructionwe can 
+simply change docker file which have history ,
+now in the repository we also have slim versions of the images to run the application which occupiecs less space so i can run multiple containers easily
+
+we are using the docker ADD commad to download and copy the files form the repository at same time at the end we need to add the path to copy the packages.
+
+we need to check the required softwares to run the application in the container se we need to select suitable image which has slim version to avoid unwanted packages.
+
+sample :
+FROM amazoncorretto:11
+ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar /spring-petclinic-2.4.2.jar (we need to 
+EXPOSE 8080
+CMD ["java", "-jar", "/spring-petclinic-2.4.2.jar"]
+
+Here we created containers using images to delete all the images and docker containers 
+
+"docker container rm -f $(docker container ls -a -q) to delete all the running and stoped containers"
+"docker container rm <container image name/id>
+"docker image rm -f $(docker container ls  -q) to delete  all the images -q all the images and containers
+"docker image rmi <image name>/id"
+
+
+To create a docker image out of the docker file approch
+
+"docker image build -t <name of the folder:tag> ."
+
+run the docker container image
+
+"docker container run -d --name <name to the container> -p <forwording port> <name of the image with tag>"
+
+sample example for the docker file approch for Game of life:
+===========================================================
+FROM tomcat:8.5.87-jdk
+ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war /usr/local/tomcat/webapps/gameoflife.war
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+
+if the ADD approch dont work 
+
+use RUN to install the soft wares and to build the code inside the container.
+
+
+In docker hub we have the image with all the base image tage req to the dockerfile choode them according to the requirment
+
+Running application this way is fine for testing but when we want to launch in the servers we need start the mysql data base servers. Data Base runs on MySql
+For that we need to start the database image to run.
+
+
+Inspecting the docker image/layers:
+==================================
+
+* when any image is pulled form the dockerhub there are lot of dependences downloaded which are required to run the application.these dependences are variey
+form image to image
+* All these dependences form layers docker image is collection of image layer,these layers are for the base image this layer on the image is read only layer
+* but when the image downloaded this layers have copy on the local file /var/lib/docker where the layer can be read/write.
+* this layers is formed with the hash coded and gives a sha256 id that is unchangable.
+* when ever we pull the image we need to use the tag/version because it default takes the latest, so when ever we use the tag or version for the application that runs
+if the version changes the change in dependences so there may be a problem in running the application. so using the tag make the aplication build on the same version.
+
+sample Docker file to build image 
+""
+Dockerfile
+FROM alpine:3
+RUN touch 1.txt
+""
+from this docker file we build a image for example
+
+mkdir trail:1.0
+
+cd trail:1.10
+
+vi Dockerfile
+
+FROM alpine:3
+RUN touch 1.txt
+
+save and build a image out of this file
+
+"docker image build -t trail:1.0 . "
+
+now we need inspect the docker image that is created 
+
+"docker image inspect <image name:tag>
+
+we get lots of information about the image those information form image layers. basically image formed of imagelayers of sh256 that is images layer.
+
+that cannot be changed because it is read only.
+ 
+but in Dockerfile approch we write write the commands to run the application which stores the history ,from that docker file we create a image so we are 
+passing some extra information(changes to the image) is done in that image the image-layer of the base image is not changed but on top of the no layer is formed
+basing on the base image and the information inside the Dockerfile.
+
+when the image gets downloaded some dependences those occupies some storage and create some storage space for the apllications, now we again download same image 
+of same version this time only image is created because the docker files have history of the images dependences so it only uses reference storage space for the second image 
+it uses the dependences of first images , so there is very less space is consumed so we can run one image or 100 images it used the dependences and storege refe of one image 
+to create multipe docker containers .
+ 
+
+* every layer has a name sha of it, these layers one will use the another layer, layers is form of filesystem present in /var/lib/docker.
+
+* these layers look like as if they are present on the image,the storage space of the first will be ref for the secont one and so on, they create the 
+layer using the first layer on top it second layer created using the reference of the layer in the local file system.
+it looks like the change is done on the base image layer but it is done on the file system image layer every change in the layers done in the read/write 
+permissions is given in the file system layers.
+so if onece a image layer is downloade we can create  100 images out of it using one storage reference.
+
+* basically layers create any changes happend in file system. layers are present because  they make reuse of the parts with in the image apart for reusing the image.
+* change can be any thing download,create,delete, and what ever effect the file system can be reason form creating the layers.
+* because it takes reference form the base image.
+ not we change the first Dockerfile with small changes.
+ 
+ This concept the main layers is to make highly reusable and less consumption of space and to run more applications in the containers.
+ 
+ 
+ ""
+ Dockerfile
+FROM alpine:3
+RUN touch 1.txt
+RUN touch 2.txt
+
+"docker image build -t <trail:2.0> ."
+now new layer gets created.
+
+***********
+docker uses the layering names with the help of SHA256 Hashing technique.
+
+***********
+
+In any software provider gives you the checksum, if you are using the same hashing the  using same software if not different version
+
+Hashing:
+--------
+This is the hashing techinuque this conbaines all the files information in the folder and forms a hash id in encripted way.
+* of two layers have same content they store same hashing /one hash id insted of 2 hashes saving the space reusability, because alredy layer with same content.
+
+Challenges for the docker images:
+--------------------------------
+* this docker file system understands the files and directory, usually the image form the docker and the container created has only read only layer , incase if we logine into
+the container and docker any changes then the container layers that gets extra layers on containe layers not on the image layers
+* Any changes done will be present on the read/write layer of the container not on the image layer
+
+* docker need a special file system to show the layers mounted on the each other as normal file system, to make that possible docker has specile file system as overlay and unionfile system.
+
+This layers approch make the space optimazation and reducing the usage of the storage space, using one image layer we can run many containers.
+
+
+when we use run command in the dockerfile those many layers created  those instructions of many add unnecessary layers some may not be reusable so we for optimizing the 
+layers created we use the formnate of hampers hand (&&)
+and pass multiple instructions so only one layer gets created insted of multiple layers.
+
+ * label is the meta data it has no functonalitys, 
+ 
+ * basically we work in expose 2 ports tcp/udp we need to mention some thing other wise tcp by default.
+ 
+ # For copying the localfiles into image we can use two instructions
+  * ADD
+copy from local as well as remote (web or http urls or git)
+ * COPY
+copy only from local machine.
+ 
+ 
+ 
+ 
+ Network access outside the application:
+ ======================================
+ basically the application inside the container will be accessed by the ip assigned by the local host the network interface on the server, through that we are able to access the application.
+now we need access the application inside the container  
+
+basically the application ip will be assigned by the local hot of the container every network has an interface when we run thr application inside the container to access the application 
+we have issue with that so we assigh a public ip to the application so that it can be accessed through the public ip of the server and port exposed on the server for the application
+
+we use the host "0.0.0.0" in the cmd to expose it to then out side of the container
+
+CMD ["ng","serve","--host","0.0.0.0"]
+
+working DIR:
+===========
+
+* When we run an application in the container by default it runs in the docker file system path that is described in the image in that when we run the application in that path
+  dir gets downloaded and run the application but we need to run the application directly in the directory of the application then we pass the directory to runthe application.
+
+
+sample project for node js angular Docker approch.
+
+
+FROM node:16-slim
+LABEL author="veerababu"
+LABEL project="dockernodejs"
+RUN git clone https://github.com/gothinkster/angular-realworld-example-app.git
+RUN cd angular-realworld-example-app && npm install -g @angular/cli && npm install
+EXPOSE 4200/tcp
+WORKDIR /angular-realworld-example-app
+CMD ["ng","serve","--host","0.0.0.0"]
+
+
+
+
+Docker Volumes:
+================
+
+*FOr every image is basically group of image layers those layers are forme don top of each other and looks as if ther are one file system this is because of overlay file system
+ this is storage drivers .
+*Any change in the image layer may not impact the image layer because it is read only layer when the container oc created form the imge layer those file system creates a thin
+ read-write layer the changes in the container are done in this layer not on the image layer.
+*basically it follows the copy-on write method that means when the changes happen in the container by the add,run,copy instructions those are first docker storage system copies
+ those files to the read-write layer on the docker container file system.
+*when ever changes are done on the image layer those are stored in the storage files of the container those file or changes have life span equels to the container ,
+to make the data of the changes to be persistance we need to store the date away for the container to mount the data to the container to the files on the docker host
+
+to store the changes of the container we use volumes ,docker volumes
+
+In docker Volumes:
+
+There are 3 types of volumes  the main purpose of the docker volumes is to persist the data of the docker containers.
+
+1.Bind mount: Bind mount is that existing folder from docker host to any folder in container , its like port forwording to all the changes will be into that folder.
+         to create the bind mounting.
+		 
+		  create a folder and bind it to the container folder and create folders 
+   example: "docker container run -d --name <bind1> -v(binding) </tmp/cont-temp:/tmp>"
+     
+	  to enter the data in to the running container
+	    "docker container exec <name of the container> <touch> /tmp/{1...4}.txt"
+		
+		now delete the container "docker container rm -f <bind1> "
+		 
+		 now check the history of the deleted container that is mounted on the host "ls/tmp/<cont-temp>"
+		 now bind the same filels to the next container cretaed and you can see that through bing same files can be shared by diff containers
+		 
+***********
+   this can also be achieved in different way 
+   
+   --mount way we need to give source and destination.
+    "docker container run -d --mount "type=bind,source=/tmp/cont-temp,target =/tmp" --name <bind2> <image name> sleep 1d"
+
+==============================
+
+ –mount:
+ Initially was used only for docker services, now can be used for standalone containers as well
+ Syntax: –mount ‘type=<bind/volume/tmpfs>,source/src=<nameofvolume>,destination/dst/target=<mountpath in container>,
+ Refer Here for complete syntax	
+            
+
+2.volume
+Stored in the hostfile system managed by Docker (/var/lib/docker/volumes/ on Linux).
+Non Docker Processes should not modify the file system
+
+"docker volume <>" sub command
+"docker container run -d --mount "type=volume,source=<name od the volume>,target:<folder in the container>" --name primary <name of the image> sleep 1d"
+volumes are preset in the docker that handels by the docker
+if we need a docker volume create a volume and mount that to the container
+
+create a MySql, and postgress volumes and mount to the containers or crate a volume  and mount that to the path in the container  
+
+"docker volume create myvolume"
+
+"docker container run -d --mount/v "type=volume,src=myvolume,target=/tmp" -P --name Volumesmnt <apline>:tag sleep1d"
+
+docker container run -d --mount/-v "type=volume,src=myvolume,target=/dev" --name --mysqlprimary Mysql sleep 1d"
+
+"docker container run -d --mount/-v "type=volume,src=myvolume,target=/dev" --name --mysqlprimary Postgress sleep 1d"
+
+
+
+
+3.tmpfs : this volume generally mount to the ram/memory in the container that used for the temperory purpose of the data.
+
+
+docker network:
+===============
+
+
+
+
+docker swarm:
+============
+Docker Swarm Mode
+Docker Swarm:
+==========
+The cluster maanagement & Orchestration features are embedded inside Docker Engine.
+Docker swarm consists of multiple docker hosts which run in swarm mode.
+Two Roles managers and workers exist in Docker swarm
+Manager is responsible for membership & delegation
+Worker is responsible for running swarm services
+Each Docker Host can be a manager, a worker or both.
+In Docker Swarm Desired State is maintained. For instance if you are running one container in swarm on a particular node (Worker) and that node goes down, then Swarm schedules this nodes task on other node to maintain the state.
+Task is a running container which is part of swarm service managed by Swarm Manager
+Nodes:
+=====
+It is instance of the docker engine participating in Swarm.
+There are two kinds of nodes
+Manager nodes:
+=========
+You communicate to manager node to deploy applications in the form of Service Definitions.
+Manager nodes dispatch unit of work called as tasks to the Worker ndoes
+Worker nodes:
+===============
+They receive & execute the tasks dispatched from manager nodes.
+An agent runs on the worker node & reports on the tasks assigned to it
+
+basically master assignes the taskes and the node executes the taskes , in docker we need to have docker swarm installed in the master server and other nodes shoulb be reachable to the master.
+
+to setup the docker swarm for the multiple networks feature 
+
+first select the server or the host where we need to run the swarm as the master and Login into ssh session of the machie which would be manager.take the note of the private ip of the master
+
+"""""""""
+
+"docker swarm init --advertise -addr <manager private ip>"
+
+then we gaet a join commond for tha other network nodes and hosts 
+"docker swarm join token "on all the nodes to join there the work gets executed as tasks by the nodes/slaves
+
+*Services and tasks
+======================
+Service is the definition of the task to be executed.
+Typically it would be the application to be deployed.
+Two kinds of Service models are available
+Replicated Services model:
+=========================
+ In this case swarm manager distributes a specific number of replica task among the nodes based upon the scale you set in the desired state
+Global Services Model: In this case swarm runs one task for the service on every available node in the cluster.
+Task
+====
+carries a Docker container and the commands to run inside the container.
+It is the atomic secheduling unit of swarm.
+Once a task is assigned to node, it cannot move to another node.
+It can only run on the assigned node or fail.
+
+
+Docker Swarm:
+============
+
+Lets look at the following scenario:
+
+As number of Docker Hosts increase the complexity of running containers becomes difficult to manage.
+A container in one host (srv1) trying to connect to container in other host (srv3) is not possible with bridge network
+Failure scenarios:
+What happens if the srv1 is down
+What happens when a container in srv1 is down
+Performing the above actions are tedious.
+Lets just think of networking perspective, docker has a mode called as swarm which enables multi-host docker networking and also it gives orchestration features.
+
+* all the nodes should be reachable to each other,install docker in all the machines,
+
+**overlay network knows the source and the destination,when we send a package ontop of it it creates another packet to overlay network source and destination.
+* in packet another packet have ths machine sorce and destination,they are transfered through network bridge.
+
+Overlay==
+---------
+eth0-->bridge-->host
+
+logical interface that connects the  overlay should be connected to the bridge.
+
+docker swrm setup.
+
+basically we have master and worker nodes and service is desired state on the master and that task is executed on the server nodes buy the master.
+
+select the mastre node where you want to install the swarm 
+
+"docker swarm init --advertise-addr "private ip of the instance>
+
+to have the cluster if we do ifconfig we can see the "veth and docker_gwbridge" in the networking those 2 are created they are bridge interface & veth(overlay gets reated.
+along with the docker initilization we get the docker swarm join command to join the nods 
+
+* by using  docker swarm we can run the multiple hosts together by making the different containers on different hosts and diff hosts can speak together.
+
+Service:-
+---------
+Lets see the nodes in docker swarm manager "docker nodes ls"
+
+no lets create a service 
+
+"docker service create --replica 2 --name <name> <image name :tag>
+
+service is to the master as desired state to maintain the actual state those are tasks that service gets turned into tasks executed on the nodes/workers by the swarm master
+
+** name a container and task,tasks are the desired state executed by master,in cluster we always need to have odd number of servers,multiple swarms, to have result of decisions
+and primary manages the work.
+we initilization swarm on one and joins other nodes as workers.
+
+service external access for docker:
+--------------------------------------------
+-> In docker single container or server maintaining is not a proble with the ports but in multi-hosting we have the proble so there are two types of services publishing.
+
+Ingress mode service:
+-------------------
+
+** "docker service create --replica 2 --publish mode=ingress,target=80,publish=8080 <name of the image>"
+
+This mode publishes the exposed port on every swarm node. load balancing is connected to the nodes .
+
+Host mode Service Publishing:
+-----------------------------
+** "docker service create --replica 2 mode=host ,target=80,publish=8080 <name of the image>"
+
+* in this mode the published port is exposed on the host where this service is running, Host takes care of the where to run the container where app presents.
+
+* we have swarm cluster and initilize the cluster and created 2 services .
+* to access them to we used 8080 port of any node in cluster.
+
+
+DOCKER COMPOSE:
+==============
+ * docker compose is a tool for running multi-container applications on docker , this is not used for th production , only to ther the application on the local system 
+for simulation.
+* DOCker compose is used by the developers for running on the local system.
+
+sample compose file in yaml formate:
+ 
+ ***
+   services:
+     app:
+	   image: httpd
+	   port:
+	     - "80:8080"
+	 
+	 db:
+	   image: mysql
+	   
+***
+
+now create a dir/ cd into -> the cd dir/ in that dir vi docker-compose.yaml..
+
+now execute command 
+
+  "docker-compose up -d (internally doing the run)
+  
+  now new network resolved by name and network.
+  
+  to stop the services "docker compose down"  
+  
+ always running the cluster to test the application is not possible so this compose.yaml file is help full for testing the applications.
+
+
+docker-compose installation on the linux machine:
+===============================================
+* by default docker-compose is present in the mac and windows , but on linux we need to install it manually in older version they used to give along with the docker installation
+in new version we need to install by commands its like plugin so behaves like sub command.
+*
+
+basically the docker compose have 3 components;
+==============================
+Version-> child is version of it.
+services:
+  child object "name of service"
+     there are sub components under the service we need to check the reference to passs those.
+  network:
+    it is also the child of the service object.
+	
+	---------
+	
+docker compose file sample:
+------------------
+
+version: "3.9"
+service:
+  webserver:
+    image: <name of the image>
+	ports:
+	  target :80
+	  publish:tcp
+	  made:host
+    network:
+	  webserver-net
+		
+  dbserver:
+    image: Mysql:5.6
+	ports: 
+	  target:
+	  publish:
+	  protocal: tcp
+	  made: host
+	network:
+      webserver-net
+
+now create a dir and cd into it and "nano docker-compose.yaml", and paste the compose yaml file and do "docker-compose up -d"
+
+this form of the approch is mainly to avoid the commands type of entry of the service so it have a history of what is done and easy way to create and delete the services.
+
+* docker compose commands use,
+* check volumes , " docker volumes ls" we have volumes create when we use mySql commands.
+ 
+"docker volume prune" to delete un-used volumes.
+
+basically docker compose is used at the development level,when the resources is created we remove and again created only containers and networks gets recreated not volumes.
+
+* we buile the docker-cmpose file of the existing image to test, we can also build the code, here we are building the image of the dockerfile exists in the code.
+
+We can run multiple yaml files.
+
+"docker compose up -f <file name > <file name>".
+
+ 
+ ***
+ "docker prune is used to remove the unused things in the container.
+ 
+ "to run a container we use the command "docker container run -d --name <name to the container> -P <name of the image>"
+ 
+ * to inspect the image we use "docker inspect <image name >
+ 
+ * to check the processers running in the container we use top command "docker container top <image name>"
+ 
+ * To know the state of the container consumed resources on the hostwe use "docker container state <image name>"
+ 
+ 
+ * to chech the logs on the container generated on STDOUT,STDERR "docker contaier logs <jenkins>"
+ 
+ port info "docker container port"
+ 
+ Treminal login "docker container exec -it <image name> /bin/bash"
+ 
+ root user login "docker contrainer exec -it -u o <image> /bin/bash"
+ 
+ loging into the running container "docker container run -it <name of the image> /bin/sh or bash"
+ 
+ 
+ * portainer.io to look container in Ui based.
+ 
+ portiner is used to check the containers info about the network,volumes, images,events, about the container running on the host.
+ 
+ * another jenkins cntainer which is constrain /restrict the  usage of the memory to the container from the host
+ "docker container run -m /--memory limit"
+ 
+ "docker container run --name <name to the container> --memory <1024mb> -d -P <image name:tag>"
+ 
+ 
+ Container registary:
+ ===================
+ 
+ container registarys are 2 types private and publlic , generally docker images are oci components (open container initiative)
+ 
+ we can have our own container registary to push the images that are custom build and that will be handeled by the organizationas private .
+ 
+ * generally registarys will have repositorys each repository refer to an application,
+ 
+ there are private registarys sush as provided as service by the cloud "azure container registary" "aws elastic container"
+ 
+ those are same as the docker hub to login into that docker login : username:
+                                                                    password:
+																	
+																to push the image "docker image push <registary> <image name:tag> "
+																
+to handle the private registarys to be installed on the terminal follow tha refer docs of the registarys.
+
+* azure container regisratys is a private registary and we create a image repository for each application and pushed into the registary
+* but in AWs elastic container  we create repository for each image and then push , in aws we create repositorys not registary, registary is collection of images.
+
+
+* for handling those private repositorys
+ install those cli 
+
